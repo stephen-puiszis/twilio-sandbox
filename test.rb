@@ -10,6 +10,7 @@ Settings = YAML.load_file('settings.yml')
 # put your default Twilio Client name here, for when a phone number isn't given
 # https://www.twilio.com/docs/errors
 default_client = "steve"
+caller_id = Settings["caller_id"] # Add a Twilio phone number or number verified with Twilio as the caller ID
 
 get '/' do
     # Find these values at twilio.com/user/account
@@ -22,9 +23,6 @@ get '/' do
     token = capability.generate
     erb :index, :locals => {:token => token}
 end
-
-# Add a Twilio phone number or number verified with Twilio as the caller ID
-caller_id = Settings["caller_id"]
 
 post '/voice' do
     number = params[:PhoneNumber]
